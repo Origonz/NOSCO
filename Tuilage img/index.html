@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>
+			My Map
+		</title>
+		<!-- Leaflet -->
+		<link rel="stylesheet" href="styles.css" />
+		<script src="openseadragon/openseadragon.js"></script>
+	</head>
+	<body>
+	<h1>My Map</h1>
+	<div id="openseadragon1" style="width: 800px; height: 600px;"></div>
+	<script src="openseadragon/openseadragon.min.js"></script>
+	<script type="text/javascript">
+    	var viewer = OpenSeadragon({
+        	id: "openseadragon1",
+        	prefixUrl: "openseadragon/images/",
+        	tileSources: "openseadragon/test2/Working Data/b010536201_lalune_1865_11_00_08.xml"
+    	});
+	</script>
+	</body>
+</html>
