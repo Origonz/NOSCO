@@ -15,37 +15,30 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
  
-public class Main extends Application {
+public class WebViewPane extends Application {
 
     @Override
-    public void start(Stage stage) {
-        stage.setTitle("HTML");
-        stage.setWidth(500);
-        stage.setHeight(500);
-        Scene scene = new Scene(new Group());
-        VBox root = new VBox();    
-        final WebView browser = new WebView();
-        final WebEngine webEngine = browser.getEngine();
-        Hyperlink hpl = new Hyperlink("phpmyadmin");
-        hpl.setOnAction(new EventHandler<ActionEvent>() {
-          @Override public void handle(ActionEvent e) {
-              webEngine.load("http://localhost/phpmyadmin");
-          }
-      });
-        
-        root.getChildren().addAll(hpl,browser);
-        scene.setRoot(root);
- 
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) {
+        StackPane root = new StackPane();
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+        webEngine.load("http://localhost/phpmyadmin");
+        root.getChildren().add(webView);
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("WebView");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
- 
+
     public static void main(String[] args) {
         launch(args);
     }
 }
+
+ 
