@@ -17,12 +17,12 @@ public class Rep {
 
     private final String dossier = "/home/origon/Documents/Journaux";
     private final String j1, j2, j3;
-
+    Journaux a;
     Rep() {
         j1 = "/La_Voie_De_L_Ain";
         j2 = "/Le_Progrès";
         j3 = "/N3";
-
+        a = new Journaux("/home/origon/Nosco.sqlite");
         if (!new File(dossier).exists()) {
             new File(dossier).mkdirs();
         }
@@ -64,7 +64,7 @@ public class Rep {
         return true; // Résultat OK  
     }
 
-    void AddJ(int t, String jour, String anne, String mois, File file) {
+    void AddJ(int t, String page,String jour, String anne, String mois, File file) {
         String nom = "";
         if (t == 1) {
             nom = j1;
@@ -84,7 +84,10 @@ public class Rep {
         if (!new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/").exists()) {
             new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/").mkdirs();
         }
-        copyFile(file, new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + file.getName()));
+        String url=dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + page + ".jpg";
+        copyFile(file, new File(url));
+        int foo = Integer.parseInt(page);
+        a.addjournal(nom,jour+"/"+mois+"/"+anne, foo, "", url);
     }
 
     void delete(String route) {
@@ -93,17 +96,21 @@ public class Rep {
             //delete(route);
         } else if (!n.delete()) {
             System.out.println("Pas marché");
+        }else{
+            System.out.println("Delete Reussi !");
         }
     };
     
     void Add(int l, File file) {
         if (file.isFile()) {
-            String a, an, mo, jo;
+            String a, an, mo, jo,pa;
             a = file.getName();
             an = a.substring(18, 22);
             mo = a.substring(23, 25);
             jo = a.substring(26, 28);
-            AddJ(l, jo, an, mo, file);
+            pa = a.substring(29, 31);
+            AddJ(l, pa, jo, an, mo, file);
+            System.out.println("Update Reussi !");
         } else {
             System.out.println("Erreur de fichier");
         }

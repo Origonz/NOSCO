@@ -18,10 +18,12 @@ public class JavaApplication2 {
      * @param args the command line arguments
      */
     //main
-	public static void main(String[] args)
-        {
-                Arbo a = new Arbo();
-                a.test();
+	public static void main(String[] arg)
+	{
+                
+                
+                //a.Add(2,"1997", "02",b);
+		Panel fen = new Panel();
 	}
     
 }

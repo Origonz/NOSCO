@@ -16,6 +16,7 @@ package javaapplication2;
  */
 import java.awt.FlowLayout;
 import java.io.File;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -32,6 +33,7 @@ public class Panel extends JFrame {
     private Rep a;
     private String s;
     private JScrollPane tr;
+    private String fi;
 
     private void initTree() {
         File dir = new File("/home/origon/Documents/Journaux");
@@ -96,7 +98,9 @@ public class Panel extends JFrame {
         JButton bouton2 = new JButton("Ajouter");
         this.add(bouton2);
         bouton2.addActionListener((java.awt.event.ActionEvent evt) -> {
-        a.Add(1,new File("/home/origon/B010536201_LALUNE_1865_11_00_01.jpg"));
+            System.out.print("Chemin du fichier : ");
+            fi = new Scanner(System.in).next();
+        a.Add(1,new File(fi));
         });
         
         this.setVisible(true);
