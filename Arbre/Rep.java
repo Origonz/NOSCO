@@ -5,14 +5,9 @@
  */
 package javaapplication2;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 /**
  *
@@ -21,7 +16,7 @@ import java.io.OutputStream;
 public class Rep {
 
     private final String dossier = "/home/origon/Documents/Journaux";
-    private String j1, j2, j3;
+    private final String j1, j2, j3;
 
     Rep() {
         j1 = "/La_Voie_De_L_Ain";
@@ -44,10 +39,8 @@ public class Rep {
 
     public static boolean copyFile(File source, File dest) {
         try {
-            // Declaration et ouverture des flux
-            java.io.FileInputStream sourceFile = new java.io.FileInputStream(source);
-
-            try {
+            try ( // Declaration et ouverture des flux
+                    java.io.FileInputStream sourceFile = new java.io.FileInputStream(source)) {
                 java.io.FileOutputStream destinationFile = null;
 
                 try {
@@ -63,18 +56,15 @@ public class Rep {
                 } finally {
                     destinationFile.close();
                 }
-            } finally {
-                sourceFile.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
             return false; // Erreur
         }
 
         return true; // Résultat OK  
     }
 
-    void Add(int t, String anne, String mois, File file) {
+    void AddJ(int t, String jour, String anne, String mois, File file) {
         String nom = "";
         if (t == 1) {
             nom = j1;
@@ -91,6 +81,31 @@ public class Rep {
         if (!new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/").exists()) {
             new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/").mkdirs();
         }
-        copyFile(file,new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/"+file.getName()));
+        if (!new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/").exists()) {
+            new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/").mkdirs();
+        }
+        copyFile(file, new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + file.getName()));
+    }
+
+    void delete(String route) {
+        File n = new File(route);
+        if (n.isDirectory()) {
+            //delete(route);
+        } else if (!n.delete()) {
+            System.out.println("Pas marché");
+        }
+    };
+    
+    void Add(int l, File file) {
+        if (file.isFile()) {
+            String a, an, mo, jo;
+            a = file.getName();
+            an = a.substring(18, 22);
+            mo = a.substring(23, 25);
+            jo = a.substring(26, 28);
+            AddJ(l, jo, an, mo, file);
+        } else {
+            System.out.println("Erreur de fichier");
+        }
     }
 }
