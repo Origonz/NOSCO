@@ -17,12 +17,12 @@ public class Rep {
 
     private final String dossier = "/home/origon/Documents/Journaux";
     private final String j1, j2, j3;
-    Journaux a;
+    //Journaux a = new Journaux("/home/origon/Nosco.sqlite");
     Rep() {
         j1 = "/La_Voie_De_L_Ain";
         j2 = "/Le_Progrès";
         j3 = "/N3";
-        a = new Journaux("/home/origon/Nosco.sqlite");
+//        a = new Journaux("/home/origon/Nosco.sqlite");
         if (!new File(dossier).exists()) {
             new File(dossier).mkdirs();
         }
@@ -87,17 +87,20 @@ public class Rep {
         String url=dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + page + ".jpg";
         copyFile(file, new File(url));
         int foo = Integer.parseInt(page);
-        a.addjournal(nom,jour+"/"+mois+"/"+anne, foo, "", url);
+        String date =jour+"/"+mois+"/"+anne;
+        //a.addjournal(nom,date, foo,"fgfdgdfg", url);
     }
 
     void delete(String route) {
         File n = new File(route);
         if (n.isDirectory()) {
-            //delete(route);
-        } else if (!n.delete()) {
+            if(n.delete())
+                System.out.println("Suppression Dossier");
+        } else{ if (!n.delete()) {
             System.out.println("Pas marché");
         }else{
             System.out.println("Delete Reussi !");
+        }
         }
     };
     
