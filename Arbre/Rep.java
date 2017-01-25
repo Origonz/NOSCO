@@ -21,7 +21,7 @@ public class Rep {
     Rep() {
         j1 = "/La_Voie_De_L_Ain";
         j2 = "/Le_Progrès";
-        j3 = "/N3";
+        j3 = "/La_Lune";
         a = new Journaux("/home/origon/Nosco.sqlite");
         if (!new File(dossier).exists()) {
             new File(dossier).mkdirs();
@@ -90,24 +90,26 @@ public class Rep {
         String date =jour+"/"+mois+"/"+anne;
         nom = nom.replace("_", " ");
         nom = nom.replace("/", "");
-        a.addjournal(nom,date, foo,"fgfdgdfg", url);
+        url = url.replace("//", "/");
+        a.addjournal(nom,date, foo,"", url);
     }
 
     void delete(String route) {
         File n = new File(route);
+        a.deletejournal(route);
         if (n.isDirectory()) {
             if(n.delete())
                 System.out.println("Suppression Dossier");
         } else{ if (!n.delete()) {
             System.out.println("Pas marché");
         }else{
-            a.deletejournal(route);
+            
             System.out.println("Delete Reussi !");
         }
         }
     };
     
-    void Add(int l, File file) {
+    void Add(int l , File file) {
         if (file.isFile()) {
             String a, an, mo, jo,pa;
             a = file.getName();
@@ -120,5 +122,18 @@ public class Rep {
         } else {
             System.out.println("Erreur de fichier");
         }
+    }
+    
+    void setJournauxContenu(String url,String con){
+        if(new File(url).isFile()){
+        a.setContenu(url, con);
+        System.out.println("Modification apporter !");
+        }else{
+            System.out.println("Ce n'est pas un fichier");
+        }
+    }
+    
+    String getJournalContenu(String url){
+       return a.getContenu(url);
     }
 }

@@ -14,13 +14,8 @@ import java.sql.SQLException;
  */
 public class Journaux {
     
-    Connexion connexion;
-    private String Nom;
-    private String Date;
-    private int Page;
-    private String Contenu;
-    private String Url;
-    
+    private Connexion connexion;
+   
     public Journaux(String Bdd){
         connexion = new Connexion(Bdd);
         connexion.connect();
@@ -70,6 +65,19 @@ public class Journaux {
         }
     }
     
+    String getContenu(String url){
+        ResultSet resultSet = connexion.query("Select * From Journaux where url ='"+url+"'");
+        try {
+                System.out.println("Select * From Journaux where url ='"+url+"'");
+            while (resultSet.next()) {
+                return resultSet.getString("contenu");
+            }
+        } catch (SQLException e) {
+           System.out.println("Select * From Journaux where url ='"+url+"'");
+        }
+        return "Erreur de co";
+    }
+    
     void getUrl(){
         ResultSet resultSet = connexion.query("Select * From Journaux");
         try {
@@ -85,16 +93,30 @@ public class Journaux {
         connexion.modifjournal("Update Journaux set nom = '" + n + "' where id = " + i);
     }
     
+    void setNom(String n, String i){
+        connexion.modifjournal("Update Journaux set nom = '" + n + "' where url = " + i);
+    }
+    
     void setDate(String d, int i){
         connexion.modifjournal("Update Journaux set date = '" + d + "' where id = " + i);
+    }
+    void setDate(String d, String i){
+        connexion.modifjournal("Update Journaux set date = '" + d + "' where url = " + i);
     }
     
     void setPage(int p, int i){
         connexion.modifjournal("Update Journaux set page = " + p + " where id = " + i);
     }
+    void setPage(int p, String i){
+        connexion.modifjournal("Update Journaux set page = " + p + " where url = " + i);
+    }
     
     void setContenu(String c, int i){
         connexion.modifjournal("Update Journaux set contenu = '" + c + "' where id = " + i);
+    }
+    
+    void setContenu(String i, String c){
+        connexion.modifjournal("Update Journaux set contenu = '" + c + "' where url = '" + i+"'");
     }
     
     void setUrl(String u, int i){
@@ -108,5 +130,4 @@ public class Journaux {
     void deletejournal(String url){
         connexion.deletejournal(url);
     }
-    
 }

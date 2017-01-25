@@ -91,7 +91,7 @@ public class Connexion {
     
     public void deletejournal(String url) {
         String query = "";
-        query = "Delete from Journaux where url like '" + url + "'";
+        query = "Delete from Journaux where url= '" + url +"'" ;
         try {
             statement.executeUpdate(query);
         } catch (SQLException e) {

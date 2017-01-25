@@ -87,6 +87,13 @@ public class Pan {
     public String getPath(){
         return s;
     }
+    public void setContenu(String c){
+        a.setJournauxContenu(s, c);
+    }
+    
+    public String getJournauxContenu(){
+        return a.getJournalContenu(s);
+    }
     private DefaultMutableTreeNode listFile(File file, DefaultMutableTreeNode node) {
         int count = 0;
         if (file.isFile()) {

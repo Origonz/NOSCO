@@ -50,7 +50,19 @@ public class Fe extends JFrame{
         bouton2.addActionListener((java.awt.event.ActionEvent evt) -> {
             System.out.print("Chemin du fichier : ");
             fi = new Scanner(System.in).next();
-        p.Add(1,new File(fi));
+        p.Add(5,new File(fi));
+        //this.getContentPane().
+        //initTree();
+        //this.getContentPane().add(tr);
+        });
+        
+        JButton bouton3 = new JButton("Modification");
+        this.add(bouton3);
+        bouton3.addActionListener((java.awt.event.ActionEvent evt) -> {
+            System.out.println(p.getJournauxContenu());
+            System.out.print("Contenu : ");
+            fi = new Scanner(System.in).nextLine();
+        p.setContenu(fi);
         //this.getContentPane().
         //initTree();
         //this.getContentPane().add(tr);
