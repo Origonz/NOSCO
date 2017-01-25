@@ -88,5 +88,15 @@ public class Connexion {
             e.printStackTrace();
         }
     }
+    
+    public void deletejournal(String url) {
+        String query = "";
+        query = "Delete from Journaux where url like '" + url + "'";
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

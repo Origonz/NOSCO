@@ -17,12 +17,12 @@ public class Rep {
 
     private final String dossier = "/home/origon/Documents/Journaux";
     private final String j1, j2, j3;
-    //Journaux a = new Journaux("/home/origon/Nosco.sqlite");
+    private Journaux a;
     Rep() {
         j1 = "/La_Voie_De_L_Ain";
         j2 = "/Le_Progrès";
         j3 = "/N3";
-//        a = new Journaux("/home/origon/Nosco.sqlite");
+        a = new Journaux("/home/origon/Nosco.sqlite");
         if (!new File(dossier).exists()) {
             new File(dossier).mkdirs();
         }
@@ -88,7 +88,9 @@ public class Rep {
         copyFile(file, new File(url));
         int foo = Integer.parseInt(page);
         String date =jour+"/"+mois+"/"+anne;
-        //a.addjournal(nom,date, foo,"fgfdgdfg", url);
+        nom = nom.replace("_", " ");
+        nom = nom.replace("/", "");
+        a.addjournal(nom,date, foo,"fgfdgdfg", url);
     }
 
     void delete(String route) {
@@ -99,6 +101,7 @@ public class Rep {
         } else{ if (!n.delete()) {
             System.out.println("Pas marché");
         }else{
+            a.deletejournal(route);
             System.out.println("Delete Reussi !");
         }
         }

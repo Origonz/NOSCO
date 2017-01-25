@@ -105,8 +105,8 @@ public class Journaux {
         connexion.addjournal(name, date, page, contenu, url);
     }
     
-    void deletejournal(int i){
-        connexion.deletejournal(i);
+    void deletejournal(String url){
+        connexion.deletejournal(url);
     }
     
 }
