@@ -5,10 +5,7 @@
  */
 package javaapplication2;
 
-import java.awt.FlowLayout;
 import java.io.File;
-import java.util.Scanner;
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;

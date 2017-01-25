@@ -17,7 +17,7 @@ public class Rep {
 
     private final String dossier = "/home/origon/Documents/Journaux";
     private final String j1, j2, j3;
-    private Journaux a;
+    private final Journaux a;
     Rep() {
         j1 = "/La_Voie_De_L_Ain";
         j2 = "/Le_Progrès";
@@ -111,12 +111,12 @@ public class Rep {
     
     void Add(int l , File file) {
         if (file.isFile()) {
-            String a, an, mo, jo,pa;
-            a = file.getName();
-            an = a.substring(18, 22);
-            mo = a.substring(23, 25);
-            jo = a.substring(26, 28);
-            pa = a.substring(29, 31);
+            String b, an, mo, jo,pa;
+            b = file.getName();
+            an = b.substring(18, 22);
+            mo = b.substring(23, 25);
+            jo = b.substring(26, 28);
+            pa = b.substring(29, 31);
             AddJ(l, pa, jo, an, mo, file);
             System.out.println("Update Reussi !");
         } else {

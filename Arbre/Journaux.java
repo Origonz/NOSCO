@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class Journaux {
     
-    private Connexion connexion;
+    private final Connexion connexion;
    
     public Journaux(String Bdd){
         connexion = new Connexion(Bdd);
@@ -28,7 +28,6 @@ public class Journaux {
                 System.out.println("Nom : " + resultSet.getString("Nom"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
     
@@ -39,7 +38,6 @@ public class Journaux {
                 System.out.println("Date : " + resultSet.getString("Date"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
     
@@ -50,7 +48,6 @@ public class Journaux {
                 System.out.println("Page : " + resultSet.getString("Page"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
     
@@ -61,7 +58,6 @@ public class Journaux {
                 System.out.println("Contenu : " + resultSet.getString("Contenu"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
     
@@ -85,7 +81,6 @@ public class Journaux {
                 System.out.println("Url : " + resultSet.getString("Url"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
     

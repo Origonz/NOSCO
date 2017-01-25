@@ -32,10 +32,8 @@ public class Connexion {
             statement = connection.createStatement();
             System.out.println("Connexion a " + DBPath + " avec succès");
         } catch (ClassNotFoundException notFoundException) {
-            notFoundException.printStackTrace();
             System.out.println("Erreur de connecxion");
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
             System.out.println("Erreur de connecxion 2");
         }
     }
@@ -45,7 +43,6 @@ public class Connexion {
             connection.close();
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -54,7 +51,6 @@ public class Connexion {
         try {
             resultat = statement.executeQuery(requet);
         } catch (SQLException e) {
-            e.printStackTrace();
             System.out.println("Erreur dans la requet : " + requet);
         }
         return resultat;
@@ -66,7 +62,6 @@ public class Connexion {
         try {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
     
@@ -74,7 +69,6 @@ public class Connexion {
         try {
             statement.executeUpdate(requet);
         } catch (SQLException e) {
-            e.printStackTrace();
             System.out.println("Erreur dans la requet : " + requet);
         }
     }
@@ -85,7 +79,6 @@ public class Connexion {
         try {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
     
@@ -95,7 +88,6 @@ public class Connexion {
         try {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

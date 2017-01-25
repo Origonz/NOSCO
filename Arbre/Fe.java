@@ -11,8 +11,6 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -62,10 +60,10 @@ public class Fe extends JFrame{
             System.out.println(p.getJournauxContenu());
             System.out.print("Contenu : ");
             fi = new Scanner(System.in).nextLine();
-        p.setContenu(fi);
-        //this.getContentPane().
-        //initTree();
-        //this.getContentPane().add(tr);
+            p.setContenu(fi);
+            //this.getContentPane().
+            //initTree();
+            //this.getContentPane().add(tr);
         });
         
         this.setVisible(true);
