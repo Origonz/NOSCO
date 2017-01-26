@@ -23,14 +23,18 @@ import java.io.PrintWriter;
 public class OCR {
 
     static String base;
+    static String urlImage;
+    //
 
-    public static String creer(String journal, String fichier) {
-        String s="";
+    public static String creerOriginal(String journal, String fichier) {
+        //on applique l'OCR sur le fichier passer en parametre et on renvoi le le texte
+        
+        String s = "";
         try {
             Ocr.setUp(); // one time setup
             Ocr ocr = new Ocr(); // create a new OCR engine
             ocr.startEngine("fra", Ocr.SPEED_FASTEST); // English
-            s = ocr.recognize(new File[]{new File(journal)}, Ocr.RECOGNIZE_TYPE_ALL, Ocr.OUTPUT_FORMAT_PLAINTEXT); // PLAINTEXT | XML | PDF | RTF
+            s = ocr.recognize(new File[]{new File(journal)}, Ocr.RECOGNIZE_TYPE_ALL, Ocr.OUTPUT_FORMAT_XML); // PLAINTEXT | XML | PDF | RTF
             System.out.println("Result: " + s);
             ocr.stopEngine();
 
@@ -45,53 +49,63 @@ public class OCR {
         return s;
     }
 
-    public static void modifier(String fichier , String chaine, String ecrire) {
-
-       
-
-        //lecture du fichier texte	
+    public static void modifier(String nomFichier, String ajout) {
+        //permet de modifier le fichier en parametre en ajoutant le contenu en parametre
         try {
+            File fichier = new File(nomFichier);
+            PrintWriter out = new PrintWriter(new FileWriter(fichier));
+            out.write(ajout); //écris dans le fichier
+            out.close(); //Ferme le flux du fichier, sauvegardant ainsi les données.
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-            InputStream ips = new FileInputStream(fichier);
-            InputStreamReader ipsr = new InputStreamReader(ips);
-            BufferedReader br = new BufferedReader(ipsr);
+    public static void nouveau(String nomFichier) {
+        //creer un nouveau fichier vide
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(nomFichier)));
+// normalement si le fichier n'existe pas, il est crée à la racine du projet
+            writer.write("");
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void ecrire_php(String urlImage, String chemin_image) {
+        
+        //creer un .php et l'edite avec le txt_php
+        
+
+        String txt_php = "<?php\n" + "\n" + "echo\"<html>\n" + "	<body>\n" + "	\n" + "		<img src=" + "\\" + "\"" + chemin_image + "\\" + "\"" + ">   \n" + "</body>   \n" + "</html>   \n" + "\"" + ";  \n" + "?>";
+
+        urlImage = "C:\\wamp64\\www\\NOSCO\\" + urlImage + ".php";
+        
+        nouveau(urlImage);
+        modifier(urlImage,txt_php);
+
+    }
+
+    public static String lire_txt(String fichier){
+        //permet de lire et récuperer le conenu d'un fichier txt ou autre txt,xml...
+        String txt="";
+        try{
+            InputStream ips=new FileInputStream(fichier); 
+            InputStreamReader ipsr=new InputStreamReader(ips);
+            BufferedReader br=new BufferedReader(ipsr);
             String ligne;
-            while ((ligne = br.readLine()) != null) {
-                ecrire += ligne + "\n";
+            while ((ligne=br.readLine())!=null){                
+		txt+=ligne+"\n";	
             }
-            ecrire += chaine;
-            br.close();
-        } catch (Exception e) {
+            br.close(); 
+	}		
+	catch (Exception e){
             System.out.println(e.toString());
-        }
-
-        //création ou ajout dans le fichier texte
-        try {
-            FileWriter fw = new FileWriter(fichier);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter fichierSortie = new PrintWriter(bw);
-            fichierSortie.println(ecrire);
-            fichierSortie.close();
-            //System.out.println("Le fichier " + fichier + " a été créé!");
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-    }
-
-    public static void nouveau(String fichier){
-        String ecrire = "";
-        try {
-            FileWriter fw = new FileWriter(fichier);
-            BufferedWriter bw = new BufferedWriter(fw);
-            try (PrintWriter fichierSortie = new PrintWriter(bw)) {
-                fichierSortie.println(ecrire);
-                //System.out.println("Le fichier " + fichier + " a été créé!");
-            }
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+	}
+        return txt;
     }
     
-    
-
 }

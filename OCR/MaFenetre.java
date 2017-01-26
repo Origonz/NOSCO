@@ -17,7 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import static ocr.OCR.base;
-import static ocr.OCR.modifier;
+import static ocr.WebViewPane.txtmodifier;
+
 /**
  *
  * @author Arnaud
@@ -27,12 +28,17 @@ public class MaFenetre extends JFrame {
     
  
 
-  private final JPanel container = new JPanel();
-  private JTextArea jtf = new JTextArea(OCR.base,20,5);
+  private JPanel container = new JPanel();
+  
+  
+  private JTextArea jtf = new JTextArea(txtmodifier,20,5);
   private final JLabel label = new JLabel();
   private final JButton button =new JButton("Modifier");
-
-  public MaFenetre(String urlTxtModifier){
+    
+  
+  public MaFenetre(String urlTxtModifier,String txtmodifier){
+     
+    
     this.setTitle("Modification ");
     this.setSize(500, 500);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,20 +52,18 @@ public class MaFenetre extends JFrame {
     jtf.setForeground(Color.BLUE);
     top.add(button);
     button.addActionListener(new ActionListener(){
+        
+        //bouton modifier quand on clique modifie le fichier comportant les modifications
         @Override
         public void actionPerformed(ActionEvent e) {
-            
-            
-            
-            String chaine=jtf.getText();
-            
+            //on recupere le texte dans le JTextArea
+            String chaine=jtf.getText();  
+            //creation du fichier modification si non existant
             OCR.nouveau(urlTxtModifier);
-            modifier(urlTxtModifier, chaine, "");
-            
-            
-            
-           System.out.println(base);
-           System.exit(0);  
+            //on remplace le contenu du fichier modifier par celui recupere dans le JTextArea
+            OCR.modifier(urlTxtModifier, chaine);          
+           // System.out.println(base);
+            System.exit(0);  
             
         }
     });
@@ -73,11 +77,5 @@ public class MaFenetre extends JFrame {
     
   }
   
-  
-  
-
-
- 
- 
  
 }

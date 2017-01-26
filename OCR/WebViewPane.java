@@ -21,34 +21,47 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import static ocr.OCR.base;
+import static ocr.OCR.urlImage;
  
 public class WebViewPane extends Application {
 
+    public static String txtmodifier;
 
 
     public static void main(String[] args)  {
         
-        String urlTxtModifier="C:\\wamp64\\www\\NOSCO\\img\\modification.txt";
+        //String txtmodifier;
+        String chemin_image = "/NOSCO/img/" + urlImage;
         
-        String urlImage = "C:\\wamp64\\www\\NOSCO\\img\\test2.jpg";
-        String urlTxtOriginal = "C:\\wamp64\\www\\NOSCO\\img\\original.txt";
+        urlImage="journal";
         
-        //String UrlPHP="test2.php";
+        OCR.ecrire_php(urlImage,chemin_image);
         
+        String urlTxtOriginal = "C:\\wamp64\\www\\NOSCO\\img\\"+urlImage+"original.xml";
         
-        base=OCR.creer(urlImage, urlTxtOriginal);
+        String urlTxtModifier="C:\\wamp64\\www\\NOSCO\\img\\"+urlImage+"modification.xml";
+        
+        String Image="C:\\wamp64\\www\\NOSCO\\img\\"+urlImage+".jpg";
+        
+        base=OCR.creerOriginal(Image, urlTxtOriginal);
+        txtmodifier=OCR.lire_txt(urlTxtModifier);
+        
              
+        OCR.nouveau(urlTxtModifier);
         
+        OCR.modifier(urlTxtModifier, base);
        
         
-        MaFenetre fen=new MaFenetre(urlTxtModifier);
+        MaFenetre fen=new MaFenetre(urlTxtModifier,txtmodifier);
         fen.setVisible(true);
         
         
          launch(args);
          
+         
         // TODO code application logic here
     }
+    
     
     
         @Override
@@ -56,7 +69,8 @@ public class WebViewPane extends Application {
         StackPane root = new StackPane();
         WebView webView = new WebView();
         WebEngine webEngine = webView.getEngine();
-        webEngine.load("http://localhost/NOSCO/test2.php");
+        webEngine.load("http://localhost/NOSCO/"+urlImage+".php");
+        
         root.getChildren().add(webView);
         Scene scene = new Scene(root);
         primaryStage.setTitle("WebView");
