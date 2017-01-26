@@ -64,7 +64,7 @@ public class Rep {
         return true; // Résultat OK  
     }
 
-    void AddJ(int t, String page,String jour, String anne, String mois, File file) throws IOException {
+    public void AddJ(int t, String page,String jour, String anne, String mois, File file) throws IOException {
         String nom = "";
         if (t == 1) {
             nom = j1;
@@ -101,7 +101,7 @@ public class Rep {
         a.addjournal(nom,date, foo,"", url);
     }
 
-    void delete(String route) {
+    public void delete(String route) {
         File n = new File(route);
         a.deletejournal(route);
         if (n.isDirectory()) {
@@ -116,7 +116,7 @@ public class Rep {
         }
     };
     
-    void Add(int l , File file) throws IOException {
+    public void Add(int l , File file) throws IOException {
         if (file.isFile()) {
             String b, an, mo, jo,pa;
             b = file.getName();
@@ -131,7 +131,7 @@ public class Rep {
         }
     }
     
-    void setJournauxContenu(String url,String con){
+    public void setJournauxContenu(String url,String con){
         if(new File(url).isFile()){
         a.setContenu(url, con);
         System.out.println("Modification apporter !");
@@ -140,13 +140,14 @@ public class Rep {
         }
     }
     
-    String getJournalContenu(String url){
+    public String getJournalContenu(String url){
        return a.getContenu(url);
     }
     
-    void AccepterCorrection(String urlOr){
+    public void AccepterCorrection(String urlOr){
         String g;
         g=urlOr.replace("Original", "Modifier");
+        
         copyFile(new File(g),new File(urlOr));
     }
     

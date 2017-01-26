@@ -7,7 +7,10 @@ package javaapplication2;
 
 import java.awt.FlowLayout;
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -48,10 +51,14 @@ public class Fe extends JFrame{
         bouton2.addActionListener((java.awt.event.ActionEvent evt) -> {
             System.out.print("Chemin du fichier : ");
             fi = new Scanner(System.in).next();
-        p.Add(5,new File(fi));
-        //this.getContentPane().
-        //initTree();
-        //this.getContentPane().add(tr);
+            try {
+                p.Add(5,new File(fi));
+                //this.getContentPane().
+                //initTree();
+                //this.getContentPane().add(tr);
+            } catch (IOException ex) {
+                System.out.println("Erreur d'add");
+            }
         });
         
         JButton bouton3 = new JButton("Modification");

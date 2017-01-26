@@ -21,7 +21,7 @@ public class Journaux {
         connexion.connect();
     }
     
-    void getNom(){
+    public void getNom(){
         ResultSet resultSet = connexion.query("Select * From Journaux");
         try {
             while (resultSet.next()) {
@@ -31,7 +31,7 @@ public class Journaux {
         }
     }
     
-    void getDate(){
+    public void getDate(){
         ResultSet resultSet = connexion.query("Select * From Journaux");
         try {
             while (resultSet.next()) {
@@ -41,7 +41,7 @@ public class Journaux {
         }
     }
     
-    void getPage(){
+    public void getPage(){
         ResultSet resultSet = connexion.query("Select * From Journaux");
         try {
             while (resultSet.next()) {
@@ -51,7 +51,7 @@ public class Journaux {
         }
     }
     
-    void getContenu(){
+    public void getContenu(){
         ResultSet resultSet = connexion.query("Select * From Journaux");
         try {
             while (resultSet.next()) {
@@ -61,7 +61,7 @@ public class Journaux {
         }
     }
     
-    String getContenu(String url){
+    public String getContenu(String url){
         ResultSet resultSet = connexion.query("Select * From Journaux where url ='"+url+"'");
         try {
                 System.out.println("Select * From Journaux where url ='"+url+"'");
@@ -74,7 +74,7 @@ public class Journaux {
         return "Erreur de co";
     }
     
-    void getUrl(){
+    public void getUrl(){
         ResultSet resultSet = connexion.query("Select * From Journaux");
         try {
             while (resultSet.next()) {
@@ -84,45 +84,45 @@ public class Journaux {
         }
     }
     
-    void setNom(String n, int i){
+    public void setNom(String n, int i){
         connexion.modifjournal("Update Journaux set nom = '" + n + "' where id = " + i);
     }
     
-    void setNom(String n, String i){
+    public void setNom(String n, String i){
         connexion.modifjournal("Update Journaux set nom = '" + n + "' where url = " + i);
     }
     
-    void setDate(String d, int i){
+    public void setDate(String d, int i){
         connexion.modifjournal("Update Journaux set date = '" + d + "' where id = " + i);
     }
-    void setDate(String d, String i){
+    public void setDate(String d, String i){
         connexion.modifjournal("Update Journaux set date = '" + d + "' where url = " + i);
     }
     
-    void setPage(int p, int i){
+    public void setPage(int p, int i){
         connexion.modifjournal("Update Journaux set page = " + p + " where id = " + i);
     }
-    void setPage(int p, String i){
+    public void setPage(int p, String i){
         connexion.modifjournal("Update Journaux set page = " + p + " where url = " + i);
     }
     
-    void setContenu(String c, int i){
+    public void setContenu(String c, int i){
         connexion.modifjournal("Update Journaux set contenu = '" + c + "' where id = " + i);
     }
     
-    void setContenu(String i, String c){
+    public void setContenu(String i, String c){
         connexion.modifjournal("Update Journaux set contenu = '" + c + "' where url = '" + i+"'");
     }
     
-    void setUrl(String u, int i){
+    public void setUrl(String u, int i){
         connexion.modifjournal("Update Journaux set url = '" + u + "' where id = " + i);
     }
     
-    void addjournal(String name, String date, int page, String contenu, String url){
+   public  void addjournal(String name, String date, int page, String contenu, String url){
         connexion.addjournal(name, date, page, contenu, url);
     }
     
-    void deletejournal(String url){
+    public void deletejournal(String url){
         connexion.deletejournal(url);
     }
 }
