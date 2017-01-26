@@ -6,6 +6,7 @@
 package javaapplication2;
 
 import java.io.File;
+import java.io.IOException;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
@@ -75,7 +76,7 @@ public class Pan {
         return tr;
     }
     
-    public void Add(int i,File f){
+    public void Add(int i,File f) throws IOException{
         a.Add(i, f);
     }
     public void delete(){

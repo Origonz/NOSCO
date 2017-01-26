@@ -64,7 +64,7 @@ public class Rep {
         return true; // Résultat OK  
     }
 
-    void AddJ(int t, String page,String jour, String anne, String mois, File file) {
+    void AddJ(int t, String page,String jour, String anne, String mois, File file) throws IOException {
         String nom = "";
         if (t == 1) {
             nom = j1;
@@ -83,6 +83,13 @@ public class Rep {
         }
         if (!new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/").exists()) {
             new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/").mkdirs();
+        }
+        if (!new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + "Correction" +"/").exists()) {
+            new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + "Correction" +"/").mkdirs();
+        }
+        if (!new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + "Correction" + "/"+ "Original" + page + ".txt").exists()) {
+            new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + "Correction" + "/" + "Original" + page + ".txt").createNewFile();
+            copyFile(new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + "Correction" + "/" + "Original" + page + ".txt"),new File(dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + "Correction" +"/" + "Modifier" + page + ".txt"));
         }
         String url=dossier + "/" + nom + "/" + anne + "/" + mois + "/" + jour + "/" + page + ".jpg";
         copyFile(file, new File(url));
@@ -109,7 +116,7 @@ public class Rep {
         }
     };
     
-    void Add(int l , File file) {
+    void Add(int l , File file) throws IOException {
         if (file.isFile()) {
             String b, an, mo, jo,pa;
             b = file.getName();
@@ -136,4 +143,11 @@ public class Rep {
     String getJournalContenu(String url){
        return a.getContenu(url);
     }
+    
+    void AccepterCorrection(String urlOr){
+        String g;
+        g=urlOr.replace("Original", "Modifier");
+        copyFile(new File(g),new File(urlOr));
+    }
+    
 }
